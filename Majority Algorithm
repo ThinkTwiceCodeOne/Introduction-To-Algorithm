@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int arr[10];
+    cout<<"waiting for input"<<endl;
+    for(int i=0; i<10; i++) {
+        cin>>arr[i];
+    }
+    cout<<"input ends"<<endl;
+    vector<pair<int,int>> v;
+    int i=0;
+    while(i<10) {
+        if(arr[i]==arr[i+1]) v.push_back(pair<int,int>(arr[i],arr[i+1]));
+        i=i+2;
+    }
+    i=0;
+    while(i<v.size()) {
+        pair<int,int> temp=v[i];
+        pair<int,int> temp2=v[i+1];
+        if(temp.first==temp2.first && temp.second==temp2.second) 
+        {
+            i=i+2;
+            continue;
+        }
+        else {
+            v.erase(v.begin()+i);
+            v.erase(v.begin()+i+1);
+        }
+        i=i+2;
+    }
+    i=0;
+    pair<int,int> res;
+    int ans;
+    if(v.size()>0)
+    {
+        while(i<v.size()) {
+            res=v[i];
+            ans=res.first;
+            break;
+        }
+    }
+    cout<<ans<<endl;
+    int count=0;
+    for(int i=0; i<10; i++) {
+        if(arr[i]==ans) count++;
+    }
+    cout<<"value of count is "<<count<<endl;
+    if(count>float(10/2)) cout<<"Winner is "<<ans<<endl;
+    else cout<<"Nobody is winner"<<endl;
+
+}
