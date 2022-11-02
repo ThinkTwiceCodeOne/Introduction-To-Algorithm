@@ -47,6 +47,6 @@ int main()
     }
     cout<<"value of count is "<<count<<endl;
     if(count>float(10/2)) cout<<"Winner is "<<ans<<endl;
-    else cout<<"Nobody is winner"<<endl;
+    else cout<<"Nobody is winner "<<endl;
 
 }
