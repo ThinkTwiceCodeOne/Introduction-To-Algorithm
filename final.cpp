@@ -1,3 +1,10 @@
+/* input : 3 10
+	   2 4 7
+    Output : 20
+             4,2,7 
+    Note: Please ignore spaces in between
+    */
+
 #include<bits/stdc++.h>
 using namespace std;
 int main()
