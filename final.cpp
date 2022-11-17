@@ -4,14 +4,24 @@ int main()
 {
 	vector<vector<int>> Cost;
 	vector<vector<string>> CutSequence;
-	int N,row,col,leftpos,rightpos,cutpos,sum;
+	int N,row,col,i,j,k,sum;
 	vector<int> cuts;
+	int l;
+	cin>>N>>l;
 	cuts.push_back(0);
+	for(int i=0;i<N;i++)
+	{
+		int num;
+		cin>>num;
+		cuts.push_back(num);
+	}
+	cuts.push_back(l);
+	sort(cuts.begin(),cuts.end());
+	/*cuts.push_back(0); 
 	cuts.push_back(1);
-	cuts.push_back(3);
-	cuts.push_back(4);
-	cuts.push_back(5);
-	cuts.push_back(7);
+	cuts.push_back(2);
+	cuts.push_back(50);
+	cuts.push_back(100);*/
 	N=cuts.size();
 	for(int i=0;i<N;i++)
 	{
@@ -27,43 +37,26 @@ int main()
 		vector<string> temp;
 		for(int j=0;j<N;j++)
 		{
-			temp.push_back("0");
+			temp.push_back("");
 		}
 		CutSequence.push_back(temp);
 	}
-	for(rightpos=2;rightpos<=N-1;rightpos++)
+	for(j=2;j<=N-1;j++)
 	{
-		for(leftpos=rightpos-2;leftpos>=0;leftpos--)
+		for(i=j-2;i>=0;i--)
 		{
-			Cost[leftpos][rightpos]=INT_MAX;
-			for(cutpos=leftpos+1;cutpos<=rightpos-1;cutpos++)
+			Cost[i][j]=INT_MAX;
+			for(k=i+1;k<=j-1;k++)
 			{
-				sum=Cost[leftpos][cutpos]+Cost[cutpos][rightpos];
-				if(sum<Cost[leftpos][rightpos])
+				sum=Cost[i][k]+Cost[k][j];
+				if(sum<Cost[i][j])
 				{
-					Cost[leftpos][rightpos]=sum;
-					CutSequence[leftpos][rightpos]=to_string(cuts[cutpos])+","+CutSequence[leftpos][cutpos]+","+CutSequence[cutpos][rightpos];
+					Cost[i][j]=sum;
+					CutSequence[i][j]=to_string(cuts[k])+","+CutSequence[i][k]+","+CutSequence[k][j];
 				}
 			}
-			Cost[leftpos][rightpos]=Cost[leftpos][rightpos]+cuts[rightpos]-cuts[leftpos];
+			Cost[i][j]=Cost[i][j]+cuts[j]-cuts[i];
 		}
-	}
-	for(int i=0;i<Cost.size();i++)
-	{
-		for(int j=0;j<Cost[i].size();j++)
-		{
-			cout<<Cost[i][j]<<" ";
-		}
-		cout<<endl;
-	}
-	cout<<"---------------------"<<endl;
-	for(int i=0;i<CutSequence.size();i++)
-	{
-		for(int j=0;j<CutSequence[i].size();j++)
-		{
-			cout<<CutSequence[i][j]<<" ";
-		}
-		cout<<endl;
 	}
 	cout<<Cost[0][N-1]<<endl;
 	cout<<CutSequence[0][N-1]<<endl;
